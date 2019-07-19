@@ -1,2 +1,4 @@
 /node_modules
 /vendor/bundle
+/public
+*.config.js
