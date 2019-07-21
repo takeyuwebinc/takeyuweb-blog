@@ -4,7 +4,10 @@
       "env": {
         "POSTGRESQL_VERSION": "11"
       },
-      "addons": ["heroku-postgresql:in-dyno"]
+      "addons": ["heroku-postgresql:in-dyno"],
+      "scripts": {
+        "test-setup": "bin/yarn"
+      }
     }
   }
 }
