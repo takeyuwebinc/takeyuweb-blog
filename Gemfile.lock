@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 876548a7e7307fc7d4c22fb6560df1474353d0cf
+  revision: a390001bbe482619e3a00186d23421e93f8e8c39
   specs:
     actioncable (6.1.0.alpha)
       actionpack (= 6.1.0.alpha)
@@ -116,7 +116,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    image_processing (1.9.0)
+    image_processing (1.9.1)
       mini_magick (>= 4.9.3, < 5)
       ruby-vips (>= 2.0.13, < 3)
     jbuilder (2.9.1)
