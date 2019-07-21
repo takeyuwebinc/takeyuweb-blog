@@ -1,2 +1,18 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="h-50 d-flex align-items-center bg-info">
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto text-center col-md-6">
+        <h1 class="display-1 text-white">実用するRails</h1>
+        <p class="lead text-primary">今日から使えるテクニックを紹介</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <%= render @recent_posts %>
+    </div>
+  </div>
+</div>

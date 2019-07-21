@@ -1,27 +1,46 @@
-<p id="notice"><%= notice %></p>
+<% if authenticated? %>
+  <div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <%= link_to "記事を作成", new_post_path, class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
 
-<h1>Posts</h1>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h1 class="mb-3"><% if params[:query].present? %>"<%= params[:query] %>"の<% end %>記事一覧</h1>
+        <% @posts.each do |post| %>
+        <div id="post-<%= post.id %>" class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title"><b><%= post.title %></b></h5>
+            <h6 class="card-subtitle my-2 text-muted">Subtitle</h6>
+            <p class="card-text"><%= truncate(post.content.to_plain_text) %></p>
+            <%= link_to "Link", post_path(post), class: "card-link" %>
+          </div>
+        </div>
+        <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post', new_post_path %>
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="">こちらもどうぞ&nbsp;<small class="text-muted">最近の記事</small></h2>
+      </div>
+    </div>
+    <div class="row">
+      <%= render @recent_posts %>
+    </div>
+  </div>
+</div>

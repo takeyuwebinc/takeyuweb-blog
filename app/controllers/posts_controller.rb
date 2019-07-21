@@ -5,7 +5,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(10)
+    if params[:query]
+      @posts = @posts.search(params[:query])
+    end
+
+    @recent_posts = Post.recent.limit(3)
   end
 
   # GET /posts/1

@@ -3,8 +3,22 @@ require 'rails_helper'
 RSpec.describe 'Posts', type: :request do
   describe 'GET /posts' do
     it 'works! (now write some real specs)' do
+      FactoryBot.create_list(:post, rand(20))
+
       get '/posts'
       expect(response).to have_http_status(200)
+    end
+
+    describe '検索' do
+      example do
+        post = FactoryBot.create(:post)
+        excluded = FactoryBot.create(:post, title: "EXCLUDED")
+
+        get '/posts', params: { query: post.title }
+        expect(response).to have_http_status(200)
+        expect(response.body).to include "post-#{post.id}"
+        expect(response.body).to_not include "post-#{excluded.id}"
+      end
     end
   end
 
