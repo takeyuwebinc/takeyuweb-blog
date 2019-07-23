@@ -1,3 +1,15 @@
+<%
+  if params[:query].present?
+    page_title = "「#{params[:query]}」の記事一覧"
+    page_description = "「#{params[:query]}」の記事一覧です。"
+  else
+    page_title = "記事一覧"
+    page_description = "記事一覧です。"
+  end
+
+  set_meta_tags title: page_title, description: page_description
+%>
+
 <% if authenticated? %>
   <div class="py-5">
   <div class="container">
@@ -14,7 +26,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10">
-        <h1 class="mb-3"><% if params[:query].present? %>"<%= params[:query] %>"の<% end %>記事一覧</h1>
+        <h1 class="mb-3"><%= page_title %></h1>
         <% @posts.each do |post| %>
         <div id="post-<%= post.id %>" class="card mb-3">
           <div class="card-body">
