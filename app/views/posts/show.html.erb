@@ -39,3 +39,16 @@
     </div>
   </div>
 </div>
+
+<% if authenticated? %>
+  <div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <%= link_to "編集", edit_post_path(@post), class: "btn btn-secondary" %>
+        <%= link_to "削除", post_path(@post), class: "btn btn-danger", method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -118,4 +118,109 @@ RSpec.describe 'Posts', type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe 'GET /posts/:id/edit' do
+    it 'works!' do
+      name = SecureRandom.hex
+      password = SecureRandom.hex
+      Rails.application.credentials.basic_auth = {
+        name: name, password: password
+      }
+
+      invalid_headers = {
+        'Authorization' => "Basic #{Base64.encode64('username:invalid')}"
+      }
+
+      valid_headers = {
+        'Authorization' => "Basic #{Base64.encode64("#{name}:#{password}")}"
+      }
+
+      post = FactoryBot.create(:post)
+
+      get "/posts/#{post.id}/edit", params: { id: post.id }, headers: invalid_headers
+      expect(response).to have_http_status(:unauthorized)
+
+      get "/posts/#{post.id}/edit", params: { id: post.id }, headers: valid_headers
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  describe 'PUT /posts/:id' do
+    it 'works!' do
+      name = SecureRandom.hex
+      password = SecureRandom.hex
+      Rails.application.credentials.basic_auth = {
+        name: name, password: password
+      }
+
+      invalid_headers = {
+        'Authorization' => "Basic #{Base64.encode64('username:invalid')}"
+      }
+
+      valid_headers = {
+        'Authorization' => "Basic #{Base64.encode64("#{name}:#{password}")}"
+      }
+
+      post = FactoryBot.create(:post)
+
+      valid_params = {
+        id: post.id,
+        post: { title: Faker::Lorem.word, content: Faker::Lorem.sentence },
+        postscript: { content: Faker::Lorem.sentence }
+      }
+
+      put "/posts/#{post.id}", params: valid_params, headers: invalid_headers
+      expect(response).to have_http_status(:unauthorized)
+
+      put "/posts/#{post.id}", params: valid_params, headers: valid_headers
+      expect(response).to have_http_status(:redirect)
+
+      expect(response).to redirect_to("/posts/#{post.id}")
+
+      follow_redirect!
+
+      expect(response.body).to include valid_params.dig(:post, :title)
+      expect(response.body).to include valid_params.dig(:post, :content)
+      expect(response.body).to include valid_params.dig(
+                :postscript,
+                :content
+              )
+    end
+  end
+
+  describe 'DELETE /posts/:id' do
+    it 'works!' do
+      name = SecureRandom.hex
+      password = SecureRandom.hex
+      Rails.application.credentials.basic_auth = {
+        name: name, password: password
+      }
+
+      invalid_headers = {
+        'Authorization' => "Basic #{Base64.encode64('username:invalid')}"
+      }
+
+      valid_headers = {
+        'Authorization' => "Basic #{Base64.encode64("#{name}:#{password}")}"
+      }
+
+      post = FactoryBot.create(:post)
+
+      valid_params = {
+        id: post.id
+      }
+
+      delete "/posts/#{post.id}", params: valid_params, headers: invalid_headers
+      expect(response).to have_http_status(:unauthorized)
+
+      delete "/posts/#{post.id}", params: valid_params, headers: valid_headers
+      expect(response).to have_http_status(:redirect)
+
+      expect(response).to redirect_to("/posts")
+
+      follow_redirect!
+
+      expect(response.body).to_not include "/posts/#{post.id}"
+    end
+  end
 end

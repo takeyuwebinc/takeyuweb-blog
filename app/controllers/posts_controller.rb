@@ -46,8 +46,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    postscript = @post.postscript || post.build_postscript
+    postscript.attributes = postscript_params
+
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params.merge(postscript: postscript))
         format.html do
           redirect_to @post, notice: 'Post was successfully updated.'
         end
