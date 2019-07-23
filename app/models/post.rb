@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   validates :title, presence: true
   has_rich_text :content
 
-  scope :recent, ->{ order(created_at: :desc) }
+  scope :recent, ->{ order(created_at: :desc, id: :desc) }
 
   # TODO: 全文検索
   def self.search(query)
