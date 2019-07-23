@@ -20,6 +20,11 @@
           <div class="mb-3">
             <%= form.rich_text_area :content %>
           </div>
+          <%= fields_for post.postscript do |postscript| %>
+            <div class="mb-3">
+              <%= postscript.text_area :content, class: "form-control" %>
+            </div>
+          <% end %>
           <%= form.submit class: "btn btn-primary" %>
         </div>
       </div>

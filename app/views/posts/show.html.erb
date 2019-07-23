@@ -1,35 +1,39 @@
 <div class="py-5">
-<div class="container">
-  <div class="row">
-    <div class="col-md-10">
-      <h1 class="mb-3"><%= @post.title %></h1>
-      <%= @post.content %>
-    </div>
-  </div>
-</div>
-</div>
-<div class="py-5">
-<div class="container">
-  <div class="row">
-    <div class="p-3 col-md-8">
-      <div class="blockquote mb-0">
-        <p>"この記事についてのコメントを書く"</p>
-        <div class="blockquote-footer">&nbsp;Yuichi Takeuchi, CEO at TakeyuWeb Inc.</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h1 class="mb-3"><%= @post.title %></h1>
+        <%= @post.content %>
       </div>
     </div>
-    <div class="col-md-2 mx-auto p-3"> <img class="img-fluid d-block rounded-circle" src="https://static.pingendo.com/img-placeholder-2.svg"> </div>
   </div>
 </div>
-</div>
-<div class="py-5" draggable="true" >
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h2 class="">こちらもどうぞ&nbsp;<small class="text-muted">関連記事</small></h2>
+
+<% if @post.postscript %>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="p-3 col-md-8">
+          <div class="blockquote mb-0">
+            <p>"<%= @post.postscript.content %>"</p>
+            <div class="blockquote-footer">&nbsp;@takeyuweb</div>
+          </div>
+        </div>
+        <div class="col-md-2 mx-auto p-3"><%= image_tag "takeyuweb.png", class: "img-fluid d-block rounded-circle" %></div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <%= render @post.related.limit(3) %>
+<% end %>
+
+<div class="py-5" draggable="true" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="">こちらもどうぞ&nbsp;<small class="text-muted">関連記事</small></h2>
+      </div>
+    </div>
+    <div class="row">
+      <%= render @post.related.limit(3) %>
+    </div>
   </div>
-</div>
 </div>

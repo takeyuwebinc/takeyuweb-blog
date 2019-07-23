@@ -12,7 +12,7 @@ RSpec.describe 'Posts', type: :request do
     describe '検索' do
       example do
         post = FactoryBot.create(:post)
-        excluded = FactoryBot.create(:post, title: "EXCLUDED")
+        excluded = FactoryBot.create(:post, title: 'EXCLUDED')
 
         get '/posts', params: { query: post.title }
         expect(response).to have_http_status(200)
@@ -65,7 +65,10 @@ RSpec.describe 'Posts', type: :request do
         'Authorization' => "Basic #{Base64.encode64("#{name}:#{password}")}"
       }
 
-      valid_attributes = { post: { title: 'TITLE', content: '<p>CONTENT</p>' } }
+      valid_attributes = {
+        post: { title: Faker::Lorem.word, content: Faker::Lorem.sentence },
+        postscript: { content: Faker::Lorem.sentence }
+      }
 
       post '/posts', params: valid_attributes
       expect(response).to have_http_status(:unauthorized)
@@ -90,7 +93,8 @@ RSpec.describe 'Posts', type: :request do
       valid_attributes = {
         post: {
           title: Faker::Lorem.word, content: "<p>#{Faker::Lorem.sentence}</p>"
-        }
+        },
+        postscript: { content: Faker::Lorem.sentence }
       }
 
       post '/posts', params: valid_attributes, headers: valid_headers
@@ -100,6 +104,10 @@ RSpec.describe 'Posts', type: :request do
 
       expect(response.body).to include valid_attributes.dig(:post, :title)
       expect(response.body).to include valid_attributes.dig(:post, :content)
+      expect(response.body).to include valid_attributes.dig(
+                :postscript,
+                :content
+              )
     end
   end
 

@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  has_one :postscript
+
   validates :title, presence: true
   has_rich_text :content
 

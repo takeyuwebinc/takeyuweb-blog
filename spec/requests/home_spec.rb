@@ -6,14 +6,12 @@ RSpec.describe 'Home', type: :request do
     expect(response).to be_successful
   end
 
-  specify "最新の3件を表示" do
+  specify '最新の3件を表示' do
     old_post = FactoryBot.create(:post)
     posts = FactoryBot.create_list(:post, 3)
 
     get root_path
-    posts.each do |post|
-      expect(response.body).to include post.title
-    end
+    posts.each { |post| expect(response.body).to include post.title }
     expect(response.body).to_not include old_post.title
   end
 end

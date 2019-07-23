@@ -6,9 +6,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.page(params[:page]).per(10)
-    if params[:query]
-      @posts = @posts.search(params[:query])
-    end
+    @posts = @posts.search(params[:query]) if params[:query]
 
     @recent_posts = Post.recent.limit(3)
   end
@@ -20,6 +18,7 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @post.build_postscript
   end
 
   # GET /posts/1/edit
@@ -29,6 +28,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.build_postscript(postscript_params)
 
     respond_to do |format|
       if @post.save
@@ -81,5 +81,9 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def postscript_params
+    params.require(:postscript).permit(:content)
   end
 end
