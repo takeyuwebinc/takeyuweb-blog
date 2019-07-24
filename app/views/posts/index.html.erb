@@ -30,7 +30,10 @@
         <% @posts.each do |post| %>
         <div id="post-<%= post.id %>" class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title"><b><%= post.title %></b></h5>
+            <h5 class="card-title">
+              <b><%= post.title %></b>
+              <% if post.unpublished? %><span class="badge badge-dark">非公開</span><% end %>
+            </h5>
             <h6 class="card-subtitle my-2 text-muted">Subtitle</h6>
             <p class="card-text"><%= truncate(post.content.to_plain_text) %></p>
             <%= link_to "Link", post_path(post), class: "card-link" %>

@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticated?
-    return @authenticated if defined?(@authenticate)
+    return @authenticated if defined?(@authenticated)
 
-    @authenticate =
+    @authenticated =
       authenticate_with_http_basic do |name, password|
         basic_auth = Rails.application.credentials.basic_auth
         ActiveSupport::SecurityUtils.secure_compare(name, basic_auth[:name]) &
