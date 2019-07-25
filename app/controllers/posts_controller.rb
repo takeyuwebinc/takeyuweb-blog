@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.page(params[:page]).per(10)
+    @posts = permitted_posts.page(params[:page]).per(10)
     @posts = @posts.search(params[:query]) if params[:query]
 
     @recent_posts = Post.recent.limit(3)
@@ -22,7 +22,9 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit; end
+  def edit
+    @post.build_postscript unless @post.postscript
+  end
 
   # POST /posts
   # POST /posts.json
@@ -46,7 +48,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    postscript = @post.postscript || post.build_postscript
+    postscript = @post.postscript || @post.build_postscript
     postscript.attributes = postscript_params
 
     respond_to do |format|
@@ -78,15 +80,19 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.find(params[:id])
+    @post = permitted_posts.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:status, :title, :content)
   end
 
   def postscript_params
     params.require(:postscript).permit(:content)
+  end
+
+  def permitted_posts
+    authenticated? ? Post.all : Post.published
   end
 end

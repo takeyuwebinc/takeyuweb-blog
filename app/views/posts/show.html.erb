@@ -4,6 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10">
+        <% if @post.unpublished? %><span class="badge badge-dark">非公開</span><% end %>
         <h1 class="mb-3"><%= @post.title %></h1>
         <%= @post.content %>
       </div>

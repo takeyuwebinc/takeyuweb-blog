@@ -25,6 +25,9 @@
               <%= postscript.text_area :content, class: "form-control" %>
             </div>
           <% end %>
+          <div class="mb-3">
+            <%= form.select :status, options_for_select(Post.statuses.keys), {}, class: "form-control" %>
+          </div>
           <%= form.submit class: "btn btn-primary" %>
         </div>
       </div>
