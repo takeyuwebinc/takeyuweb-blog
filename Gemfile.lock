@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 5944a312921b9a27fce7bef317e42213c4efaa3b
+  revision: 3d83fff3bb83c428492520eb4576f0901dd3d53a
   specs:
     actioncable (6.1.0.alpha)
       actionpack (= 6.1.0.alpha)
@@ -37,7 +37,7 @@ GIT
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
-      rails-html-sanitizer (~> 1.0, >= 1.0.3)
+      rails-html-sanitizer (~> 1.1, >= 1.1.0)
     activejob (6.1.0.alpha)
       activesupport (= 6.1.0.alpha)
       globalid (>= 0.3.6)
@@ -168,7 +168,7 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.4)
+    rails-html-sanitizer (1.1.0)
       loofah (~> 2.2, >= 2.2.2)
     rake (12.3.3)
     rb-fsevent (0.10.3)
