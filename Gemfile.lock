@@ -156,7 +156,7 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
-    pg (1.1.4)
+    pg (1.2.2)
     puma (4.1.1)
       nio4r (~> 2.0)
     rack (2.1.1)
