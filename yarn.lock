@@ -680,12 +680,12 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@prettier/plugin-ruby@^0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@prettier/plugin-ruby/-/plugin-ruby-0.15.0.tgz#493f8e79edad05afcd9ef8caf1deca82b9a2f3cc"
-  integrity sha512-INL6bBNF1Xg/2v4bdmjGxIvlAronrkkzGrI8JwUjda87hP2SOQbltXLC19Uo6+1mufaS6Kj2dlGSmTIlfxZwcw==
+"@prettier/plugin-ruby@^0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@prettier/plugin-ruby/-/plugin-ruby-0.18.1.tgz#752b7a3af9f16f89886a0965c68fbf8d36c9ec31"
+  integrity sha512-JtV11bkFpxbYAj7yM/KgyOvFz6KvWaR5J/kx1BD5ksb2+ritScXE2ADAHjYomiAvpIGdHKnywhJBGpzltRdUpQ==
   dependencies:
-    prettier "^1.16.4"
+    prettier ">=1.10"
 
 "@rails/actioncable@^6.0.2":
   version "6.0.2"
@@ -5515,7 +5515,12 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
-prettier@^1.16.4, prettier@^1.19.1:
+prettier@>=1.10:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.4.tgz#2d1bae173e355996ee355ec9830a7a1ee05457ef"
+  integrity sha512-SVJIQ51spzFDvh4fIbCLvciiDMCrRhlN3mbZvv/+ycjvmF5E73bKdGfU8QDLNmjYJf+lsGnDBC4UUnvTe5OO0w==
+
+prettier@^1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
   integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
